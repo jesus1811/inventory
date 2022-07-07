@@ -1,4 +1,5 @@
-@use "../../scss/mixins" as *;
+@use "/scss/variables" as *;
+@use "/scss/mixins" as *;
 .containerTitle {
   @include flex;
   gap: 20px;

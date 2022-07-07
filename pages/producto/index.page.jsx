@@ -18,7 +18,7 @@ const Producto = () => {
       <section className={styles.containerCard}>
         <Link href="/producto">
           <a>
-            <Card variant="center" size="small">
+            <Card center small>
               <img className={styles.image} src="/image.jpg" alt="image" />
               <Title variant="textMain">Bebidas</Title>
             </Card>
@@ -26,7 +26,7 @@ const Producto = () => {
         </Link>
         <Link href="/producto">
           <a>
-            <Card variant="center" size="small">
+            <Card center small>
               <img className={styles.image} src="/image.jpg" alt="image" />
               <Title variant="textMain">Bebidas</Title>
             </Card>
@@ -34,7 +34,7 @@ const Producto = () => {
         </Link>
         <Link href="/producto">
           <a>
-            <Card variant="center" size="small">
+            <Card center small>
               <img className={styles.image} src="/image.jpg" alt="image" />
               <Title variant="textMain">Bebidas</Title>
             </Card>

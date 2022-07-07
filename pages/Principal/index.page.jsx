@@ -1,9 +1,30 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { Main, NavBar } from "../../components/layouts";
 import styles from "./styles.module.scss";
 import { Add, Card, Target, Title } from "../../components/common";
 import Link from "next/link";
+import { categoriaGetService } from "../../services/categoria.service";
+import { useSelector, useDispatch } from "react-redux";
+import { cargar } from "../../store/categoriaSlice";
 
 const PrincipalPage = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const auth = useSelector((state) => state.auth.value);
+  const categorias = useSelector((state) => state.categorias.value);
+
+  const getCategoria = async () => {
+    const resCategoria = await categoriaGetService(auth.accessToken);
+    dispatch(cargar(resCategoria));
+  };
+
+  useEffect(() => {
+    if (!auth?.accessToken) router.push("/");
+  }, [auth]);
+  useEffect(() => {
+    getCategoria();
+  }, []);
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
       <NavBar />
@@ -18,34 +39,18 @@ const PrincipalPage = () => {
         <Title variant="subTitle">Categorias</Title>
       </div>
       <section className={styles.containerCard}>
-        <Link href="/producto">
-          <a>
-            <Card variant="center" size="small">
-              <img className={styles.image} src="/image.jpg" alt="image" />
-              <Title variant="textMain">Bebidas</Title>
-            </Card>
-          </a>
-        </Link>
-        <Card variant="center" size="small">
-          <img className={styles.image} src="/image.jpg" alt="image" />
-          <Title variant="textMain">Bebidas</Title>
-        </Card>
-        <Card variant="center" size="small">
-          <img className={styles.image} src="/image.jpg" alt="image" />
-          <Title variant="textMain">Bebidas</Title>
-        </Card>
-        <Card variant="center" size="small">
-          <img className={styles.image} src="/image.jpg" alt="image" />
-          <Title variant="textMain">Bebidas</Title>
-        </Card>
-        <Card variant="center" size="small">
-          <img className={styles.image} src="/image.jpg" alt="image" />
-          <Title variant="textMain">Bebidas</Title>
-        </Card>
-        <Card variant="center" size="small">
-          <img className={styles.image} src="/image.jpg" alt="image" />
-          <Title variant="textMain">Bebidas</Title>
-        </Card>
+        {categorias.map((categoria) => {
+          return (
+            <Link href="/producto" key={categoria.id}>
+              <a>
+                <Card center small>
+                  <img className={styles.image} src="/image.jpg" alt="image" />
+                  <Title variant="textMain">{categoria.nombre}</Title>
+                </Card>
+              </a>
+            </Link>
+          );
+        })}
       </section>
     </Main>
   );

@@ -1,4 +1,6 @@
-@use "../scss/variables" as *;
+@use "/scss/variables" as *;
+@use "/scss/mixins" as *;
+
 .containerTitle {
   display: flex;
   flex-direction: column;
@@ -22,6 +24,11 @@
   align-items: center;
   gap: 40px;
   padding-bottom: 20px;
+  p {
+    font-size: $text;
+    color: red;
+    text-align: center;
+  }
 }
 .text {
   padding: 10px;
@@ -30,9 +37,4 @@
   &__link {
     color: $purple;
   }
-}
-.error {
-  font-size: $text;
-  color: red;
-  text-align: center;
 }

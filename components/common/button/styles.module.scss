@@ -1,4 +1,5 @@
-@use "../../../scss/variables" as *;
+@use "/scss/variables" as *;
+@use "/scss/mixins" as *;
 .button {
   font-size: $text;
   padding: 8px 16px;
