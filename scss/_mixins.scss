@@ -1,0 +1,9 @@
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin content {
+  width: 100%;
+  max-width: 1000px;
+}

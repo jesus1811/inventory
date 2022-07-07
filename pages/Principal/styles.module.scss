@@ -1,0 +1,27 @@
+@use "../../scss/mixins" as *;
+.containerTarget {
+  @include content;
+  @include flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.containerSubtitle {
+  width: 100%;
+  @include flex;
+  gap: 20px;
+  margin: 15px 0;
+}
+.image {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+.containerCard {
+  @include content;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}

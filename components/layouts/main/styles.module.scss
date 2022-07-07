@@ -1,0 +1,12 @@
+@use "../../../scss/variables" as *;
+.container {
+  width: 100%;
+  padding: 20px 22px;
+  min-height: 100vh;
+  background: $blueDark;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+}
