@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { useSelector } from "react-redux";
 import { Add, Card, Target, Title } from "../../components/common";
 import { Main, NavBar } from "../../components/layouts";
+import useProduct from "../../hooks/useProduct";
 import styles from "./styles.module.scss";
 
 const Producto = () => {
-  const productos = useSelector((state) => state.productoForCategoria.value);
+  const { productosForCategory } = useProduct();
   return (
     <Main>
       <NavBar />
@@ -18,7 +18,7 @@ const Producto = () => {
         <Target count="20" text="Total de Bebidas" color="purple" />
       </section>
       <section className={styles.containerCard}>
-        {productos.map((producto) => {
+        {productosForCategory.map((producto) => {
           return (
             <Link href="/producto" key={producto.id}>
               <a>

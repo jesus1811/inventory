@@ -1,19 +1,10 @@
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { logut } from "../../../store/authSlice";
+import useUser from "../../../hooks/useUser";
 
 export const NavBar = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const { handleClickLogut } = useUser();
 
-  const handleClickLogout = () => {
-    dispatch(logut());
-    localStorage.setItem("user", JSON.stringify({}));
-    router.push("/");
-  };
-  
   return (
     <section className={styles.container}>
       <div className={styles.content}>
@@ -24,7 +15,7 @@ export const NavBar = () => {
           <a href="">Categorias</a>
           <a href="">Productos</a>
           <a href="">Usuarios</a>
-          <button onClick={handleClickLogout}>Cerrar session</button>
+          <button onClick={handleClickLogut}>Cerrar session</button>
         </article>
       </div>
     </section>

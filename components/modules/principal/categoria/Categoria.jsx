@@ -1,22 +1,17 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useCategory from "../../../../hooks/useCategory";
+import useProduct from "../../../../hooks/useProduct";
 import { productoGetService } from "../../../../services/producto.service";
 import { cargar } from "../../../../store/productoForCategoriaSlice";
 import { Card, Title } from "../../../common";
 import styles from "./styles.module.scss";
 
 const Categoria = ({ categoria }) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.value);
-  const redirect = async () => {
-    router.push("/producto");
-    const response = await productoGetService(auth.accessToken);
-    if (response) dispatch(cargar({ data: response, id: categoria.id }));
-  };
+  const { getProductsForCategoria } = useProduct();
   return (
-    <button key={categoria.id} onClick={redirect}>
+    <button key={categoria.id} onClick={() => getProductsForCategoria(categoria.id)}>
       <a>
         <Card center small>
           <img className={styles.image} src="/image.jpg" alt="image" />
