@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-export const Target = ({ count, text, color }) => {
+const Target = ({ count, text, color }) => {
   return (
     <article className={`${styles.container} ${styles["container__" + color]}`}>
       <p className={styles.count}>{count}</p>
@@ -7,3 +7,4 @@ export const Target = ({ count, text, color }) => {
     </article>
   );
 };
+export default Target;

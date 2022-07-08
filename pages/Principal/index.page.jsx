@@ -1,29 +1,24 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Main, NavBar } from "../../components/layouts";
 import styles from "./styles.module.scss";
-import { Add, Card, Target, Title } from "../../components/common";
-import Link from "next/link";
+import { Add, Loading, Target, Title } from "../../components/common";
 import { categoriaGetService } from "../../services/categoria.service";
 import { useSelector, useDispatch } from "react-redux";
 import { cargar } from "../../store/categoriaSlice";
+import { Categoria } from "../../components/modules/principal";
 
 const PrincipalPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const auth = useSelector((state) => state.auth.value);
   const categorias = useSelector((state) => state.categorias.value);
-
-  const getCategoria = async () => {
-    const resCategoria = await categoriaGetService(auth.accessToken);
-    dispatch(cargar(resCategoria));
-  };
-
+  const [loaderCategorias, setLoaderCategorias] = useState(true);
   useEffect(() => {
     if (!auth?.accessToken) router.push("/");
   }, [auth]);
   useEffect(() => {
-    getCategoria();
+    categoriaGetService(auth.accessToken, dispatch, cargar, setLoaderCategorias);
   }, []);
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
@@ -39,18 +34,13 @@ const PrincipalPage = () => {
         <Title variant="subTitle">Categorias</Title>
       </div>
       <section className={styles.containerCard}>
-        {categorias.map((categoria) => {
-          return (
-            <Link href="/producto" key={categoria.id}>
-              <a>
-                <Card center small>
-                  <img className={styles.image} src="/image.jpg" alt="image" />
-                  <Title variant="textMain">{categoria.nombre}</Title>
-                </Card>
-              </a>
-            </Link>
-          );
-        })}
+        {loaderCategorias ? (
+          <Loading />
+        ) : (
+          categorias.map((categoria) => {
+            return <Categoria key={categoria.id} categoria={categoria} />;
+          })
+        )}
       </section>
     </Main>
   );

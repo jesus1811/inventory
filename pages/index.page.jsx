@@ -15,13 +15,10 @@ const Index = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.value);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({ message: "", active: false });
 
   const handleClickRegistrar = async () => {
-    const response = await authLoginService(usuario.value,password.value);
-    dispatch(login(response));
-    localStorage.setItem("user", JSON.stringify(response));
-    if (!response) setError(true);
+    authLoginService(usuario.value, password.value, dispatch, login, error, setError);
   };
 
   useEffect(() => {
@@ -39,7 +36,7 @@ const Index = () => {
           <Input {...usuario} placeholder="Usuario" type="text" />
           <Input {...password} placeholder="Contraseña" type="password" />
           <Button onClick={handleClickRegistrar}>Ingresar</Button>
-          {error && <p>Usuario y/o contraseña incorrecta</p>}
+          {error.active && <p>{error.message}</p>}
         </div>
         <p className={styles.text}>
           no tienes cuenta?
