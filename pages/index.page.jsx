@@ -18,7 +18,9 @@ const Index = () => {
   const [error, setError] = useState({ message: "", active: false });
 
   const handleClickRegistrar = async () => {
-    authLoginService(usuario.value, password.value, dispatch, login, error, setError);
+    const data = await authLoginService(usuario.value, password.value);
+    if (data.message) setError({ message: data.message, active: true });
+    dispatch(login(data));
   };
 
   useEffect(() => {

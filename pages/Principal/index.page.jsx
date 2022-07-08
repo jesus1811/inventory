@@ -14,11 +14,18 @@ const PrincipalPage = () => {
   const auth = useSelector((state) => state.auth.value);
   const categorias = useSelector((state) => state.categorias.value);
   const [loaderCategorias, setLoaderCategorias] = useState(true);
+  const getCategorias = async () => {
+    const response = await categoriaGetService(auth.accessToken);
+    if (response) {
+      dispatch(cargar(response));
+      setLoaderCategorias(false);
+    }
+  };
   useEffect(() => {
     if (!auth?.accessToken) router.push("/");
   }, [auth]);
   useEffect(() => {
-    categoriaGetService(auth.accessToken, dispatch, cargar, setLoaderCategorias);
+    getCategorias();
   }, []);
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
