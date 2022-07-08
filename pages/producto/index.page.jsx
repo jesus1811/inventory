@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { Add, Card, Target, Title } from "../../components/common";
 import { Main, NavBar } from "../../components/layouts";
+import useCategory from "../../hooks/useCategory";
 import useProduct from "../../hooks/useProduct";
 import styles from "./styles.module.scss";
 
 const Producto = () => {
   const { productosForCategory } = useProduct();
+  const { categoria } = useCategory();
   return (
     <Main>
       <NavBar />
       <section className={styles.containerTitle}>
         <Add />
-        <Title>Bebidas</Title>
+        <Title>{categoria.nombre}</Title>
       </section>
       <section className={styles.containerSearh}>
         <Target count="20" text="Total de Bebidas" color="purpleDark" />

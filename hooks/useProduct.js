@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productoGetService } from "../services/producto.service";
 import { cargar } from "../store/productoForCategoriaSlice";
-
+import { cargar as cargarId } from "../store/CategoriaidSlice";
+import { categoriaIdGetService } from "../services/categoria.service";
 const useProduct = () => {
   const auth = useSelector((state) => state.auth.value);
   const router = useRouter();
@@ -16,14 +17,9 @@ const useProduct = () => {
     router.push("/producto");
   };
 
-  const getProducts = async () => {
-    const response = await productoGetService(auth.accessToken);
-  };
-
   useEffect(() => {}, []);
   return {
     productosForCategory,
-    getProducts,
     getProductsForCategoria,
   };
 };
