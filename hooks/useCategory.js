@@ -12,6 +12,7 @@ const useCategory = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [loaderCategorias, setLoaderCategorias] = useState(true);
+  const [modalCategory, setModalCategory] = useState(false);
 
   const getCategorias = async () => {
     const response = await categoriaGetService(auth.accessToken);
@@ -24,6 +25,9 @@ const useCategory = () => {
     const response = await categoriaIdGetService(auth.accessToken, id);
     if (response) dispatch(cargarId(response));
   };
+  const hancleModal = () => {
+    setModalCategory(!modalCategory);
+  };
   useEffect(() => {
     if (!auth?.accessToken) router.push("/");
   }, [auth]);
@@ -31,6 +35,8 @@ const useCategory = () => {
     getCategorias();
   }, []);
   return {
+    modalCategory,
+    hancleModal,
     auth,
     loaderCategorias,
     categorias,

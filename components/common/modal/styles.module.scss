@@ -1,0 +1,16 @@
+@use "/scss/variables" as *;
+@use "/scss/mixins" as *;
+
+.containerModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $blueDark;
+  outline: none;
+  border-radius: $radius;
+}

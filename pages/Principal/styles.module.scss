@@ -21,3 +21,19 @@
   flex-wrap: wrap;
   gap: 30px;
 }
+.containerTitleModal {
+  @include flex;
+  flex-direction: column;
+  width: 312px;
+  border-radius: 4px;
+  background-color: $purpleDark;
+}
+.containerInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 0;
+}
