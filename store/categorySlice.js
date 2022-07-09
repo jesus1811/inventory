@@ -4,15 +4,14 @@ const local = () => {
   return [];
 };
 const initialState = { value: local() };
-const categoriaIdSlice = createSlice({
-  name: "categoria",
+const categorySlice = createSlice({
+  name: "category",
   initialState,
   reducers: {
-    cargar: (state, action) => {
+    setCategory: (state, action) => {
       state.value = action.payload;
-      localStorage.setItem("categorie", JSON.stringify(action.payload));
     },
   },
 });
-export const { cargar } = categoriaIdSlice.actions;
-export default categoriaIdSlice.reducer;
+export const { setCategory } = categorySlice.actions;
+export default categorySlice.reducer;

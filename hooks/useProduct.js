@@ -1,26 +1,19 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productoGetService } from "../services/producto.service";
-import { cargar } from "../store/productoForCategoriaSlice";
-import { cargar as cargarId } from "../store/CategoriaidSlice";
-import { categoriaIdGetService } from "../services/categoria.service";
+import { setProducts } from "../store/productsSlice";
 const useProduct = () => {
-  const auth = useSelector((state) => state.auth.value);
-  const router = useRouter();
+  const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  const productosForCategory = useSelector((state) => state.productoForCategoria.value);
 
-  const getProductsForCategoria = async (id) => {
-    const response = await productoGetService(auth.accessToken);
-    if (response) dispatch(cargar({ data: response, id: id }));
-    router.push("/producto");
+  const getProducts = async (setLoader) => {
+    const data = await productoGetService(user.accessToken);
+    if (data) {
+      dispatch(setProducts(data));
+      setLoader(false);
+    }
   };
-
-  useEffect(() => {}, []);
   return {
-    productosForCategory,
-    getProductsForCategoria,
+    getProducts,
   };
 };
 

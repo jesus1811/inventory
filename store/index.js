@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./authSlice";
-import CategoriaidSlice from "./CategoriaidSlice";
-import categoriaSlice from "./categoriaSlice";
-import productoForCategoriaSlice from "./productoForCategoriaSlice";
+import categoriesSlice from "./categoriesSlice";
+import categorySlice from "./categorySlice";
+import productsCategorySlice from "./productsSlice";
+import userSlice from "./userSlice";
 
 const store = configureStore({
   reducer: {
-    auth: authSlice,
-    categorias: categoriaSlice,
-    productoForCategoria: productoForCategoriaSlice,
-    categoria: CategoriaidSlice
+    user: userSlice,
+    categories: categoriesSlice,
+    products: productsCategorySlice,
+    category: categorySlice,
   },
 });
 export default store;

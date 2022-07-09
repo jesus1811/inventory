@@ -4,18 +4,14 @@ const local = () => {
   return {};
 };
 const initialState = { value: local() };
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
+    setUser: (state, action) => {
       state.value = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload));
-    },
-    logut: (state) => {
-      state.value = {};
     },
   },
 });
-export const { login, logut } = authSlice.actions;
-export default authSlice.reducer;
+export const { setUser } = userSlice.actions;
+export default userSlice.reducer;

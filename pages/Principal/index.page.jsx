@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Main, NavBar } from "../../components/layouts";
 import styles from "./styles.module.scss";
 import { Add, Button, Card, Input, Loading, Modal, Target, Title } from "../../components/common";
@@ -5,7 +7,12 @@ import { Categoria } from "../../components/modules/principal";
 import useCategory from "../../hooks/useCategory";
 
 const PrincipalPage = () => {
-  const { loaderCategorias, categorias, modalCategory, hancleModal } = useCategory();
+  const categories = useSelector((state) => state.categories.value);
+  const [loaderCategories, setLoaderCategories] = useState(true);
+  const { getCategories } = useCategory();
+  useEffect(() => {
+    getCategories(setLoaderCategories);
+  }, []);
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
       <NavBar />
@@ -15,7 +22,7 @@ const PrincipalPage = () => {
         <Target count="20" text="Total de Productos" color="purple" />
         <Target count="20" text="Total de Productos" color="purpleLigth" />
       </section>
-      <Modal open={modalCategory} onClose={hancleModal}>
+      {/* <Modal open={modalCategory} onClose={hancleModal}>
         <article className={styles.containerTitleModal}>
           <Title>Categoria</Title>
         </article>
@@ -27,16 +34,16 @@ const PrincipalPage = () => {
             <Button>Agregar</Button>
           </div>
         </Card>
-      </Modal>
+      </Modal> */}
       <div className={styles.containerSubtitle}>
-        <Add onClick={hancleModal} />
+        <Add/>
         <Title variant="subTitle">Categorias</Title>
       </div>
       <section className={styles.containerCard}>
-        {loaderCategorias ? (
+        {loaderCategories ? (
           <Loading />
         ) : (
-          categorias.map((categoria) => {
+          categories.map((categoria) => {
             return <Categoria key={categoria.id} categoria={categoria} />;
           })
         )}
