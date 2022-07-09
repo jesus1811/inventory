@@ -9,6 +9,7 @@ import useCategory from "../../hooks/useCategory";
 const PrincipalPage = () => {
   const categories = useSelector((state) => state.categories.value);
   const [loaderCategories, setLoaderCategories] = useState(true);
+  const [isModal, setIsModal] = useState(false);
   const { getCategories } = useCategory();
   useEffect(() => {
     getCategories(setLoaderCategories);
@@ -22,7 +23,7 @@ const PrincipalPage = () => {
         <Target count="20" text="Total de Productos" color="purple" />
         <Target count="20" text="Total de Productos" color="purpleLigth" />
       </section>
-      {/* <Modal open={modalCategory} onClose={hancleModal}>
+      <Modal open={isModal} onClose={() => setIsModal(!isModal)}>
         <article className={styles.containerTitleModal}>
           <Title>Categoria</Title>
         </article>
@@ -34,9 +35,9 @@ const PrincipalPage = () => {
             <Button>Agregar</Button>
           </div>
         </Card>
-      </Modal> */}
+      </Modal>
       <div className={styles.containerSubtitle}>
-        <Add/>
+        <Add onClick={() => setIsModal(true)} />
         <Title variant="subTitle">Categorias</Title>
       </div>
       <section className={styles.containerCard}>

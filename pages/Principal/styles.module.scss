@@ -25,15 +25,13 @@
   @include flex;
   flex-direction: column;
   width: 312px;
-  border-radius: 4px;
+  border-radius: $radius;
   background-color: $purpleDark;
 }
 .containerInput {
-  display: flex;
+  @include flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
-  align-items: center;
   gap: 40px;
   padding: 20px 0;
 }
