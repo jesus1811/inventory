@@ -12,12 +12,10 @@ const Categoria = ({ categoria }) => {
   };
   return (
     <button key={categoria.id} onClick={handleClickRedirect}>
-      <a>
-        <Card center small>
-          <img className={styles.image} src="/image.jpg" alt="image" />
-          <Title variant="textMain">{categoria.nombre}</Title>
-        </Card>
-      </a>
+      <Card center small>
+        <img className={styles.image} src="/image.jpg" alt="image" />
+        <Title variant="textMain">{categoria.nombre}</Title>
+      </Card>
     </button>
   );
 };

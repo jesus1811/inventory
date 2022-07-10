@@ -16,3 +16,12 @@ export const categoriaIdGetService = async (token, id) => {
     console.log(err);
   }
 };
+export const createCategoryService = async (token, nombre, foto) => {
+  try {
+    const response = await axios.post(process.env.NEXT_PUBLIC_URL + "/categoria", { nombre, foto }, formatToken(token));
+    if (response.status === 200) return response.data;
+  } catch (err) {
+    console.log(err);
+    if (err.response.status === 400) return err.response.data;
+  }
+};

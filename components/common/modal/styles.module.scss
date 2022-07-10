@@ -14,3 +14,22 @@
   outline: none;
   border-radius: $radius;
 }
+.containerTitleModal {
+  @include flex;
+  flex-direction: column;
+  width: 312px;
+  border-radius: $radius;
+  background-color: $purpleDark;
+}
+.containerInput {
+  @include flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+  padding: 20px 0;
+  p {
+    font-size: $text;
+    color: $purple;
+    text-align: center;
+  }
+}

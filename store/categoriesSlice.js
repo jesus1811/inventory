@@ -10,6 +10,7 @@ const categoriesSlice = createSlice({
   reducers: {
     setCategories: (state, action) => {
       state.value = action.payload;
+      localStorage.setItem("categories", JSON.stringify(action.payload));
     },
   },
 });
