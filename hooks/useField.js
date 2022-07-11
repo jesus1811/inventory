@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const useField = (type, limit = 100) => {
-  const [value, setValue] = useState("");
+const useField = (limit = 100, initialState = "", type) => {
+  const [value, setValue] = useState(initialState);
   const onChange = (e) => {
     setValue(e.target.value.slice(0, limit));
   };
@@ -14,4 +14,3 @@ const useField = (type, limit = 100) => {
 };
 
 export default useField;
-

@@ -11,8 +11,8 @@ import useUser from "../hooks/useUser";
 const Index = () => {
   const user = useSelector((state) => state.user.value);
   const router = useRouter();
-  const usuario = useField();
-  const password = useField();
+  const usuario = useField(99,"jesus1811");
+  const password = useField(99,"1153259");
   const { handleClickLogin } = useUser();
   useEffect(() => {
     if (!user?.accessToken) router.push("/");
@@ -25,15 +25,15 @@ const Index = () => {
       <Card center>
         <img className={styles.images} src="/login.svg" alt="login" />
         <div className={styles.containerInput}>
-          <Input {...usuario} placeholder="Usuario" type="text" />
-          <Input {...password} placeholder="Contraseña" type="password" />
+          <Input {...usuario} placeholder="Usuario" type="text" value={usuario.value} />
+          <Input {...password} placeholder="Contraseña" type="password" value={password.value} />
           <Button onClick={() => handleClickLogin(usuario.value, password.value)}>Ingresar</Button>
           {user.message && <p>{user.message}</p>}
         </div>
         <p className={styles.text}>
           no tienes cuenta?
           <Link href="./registro">
-            <a className={styles.text__link}> Registrar</a>
+            <a className={styles.text__link}>Registrar</a>
           </Link>
         </p>
       </Card>
