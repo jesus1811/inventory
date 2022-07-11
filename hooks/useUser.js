@@ -1,28 +1,31 @@
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { authLoginService } from "../services/auth.service";
 import { setUser } from "../store/userSlice";
 
 const useUser = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
 
   const handleClickLogin = async (usuario, password) => {
     const data = await authLoginService(usuario, password);
     if (data.message) dispatch(setUser({ message: data.message }));
     if (!data.message) {
       dispatch(setUser(data));
-      localStorage.setItem("user", JSON.stringify(data));
       router.push("/Principal");
     }
   };
   const handleClickLogut = () => {
     dispatch(setUser({}));
-    localStorage.setItem("user", JSON.stringify({}));
-    router.push("/");
   };
+  useEffect(() => {
+    if (!user.accessToken) router.push("/");
+  }, [user]);
   return {
     handleClickLogin,
+    user,
     handleClickLogut,
   };
 };

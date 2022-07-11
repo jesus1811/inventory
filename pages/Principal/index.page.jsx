@@ -1,31 +1,27 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { Main, NavBar } from "../../components/layouts";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/router";
 import { Add, Button, Input, Loading, Modal, Target, Title } from "../../components/common";
 import { Categoria } from "../../components/modules/principal";
 import useCategory from "../../hooks/useCategory";
 import useField from "../../hooks/useField";
+import useUser from "../../hooks/useUser";
 
 const PrincipalPage = () => {
-  const categories = useSelector((state) => state.categories.value);
-  const user = useSelector((state) => state.user.value);
+  const router = useRouter();
   const nombre = useField();
   const foto = useField();
-  const [loaderCategories, setLoaderCategories] = useState(true);
   const [isModal, setIsModal] = useState(false);
-  const [messageModal, setMessageModal] = useState({
-    isActive: false,
-    message: "",
-  });
-  const { getCategories, createCategory } = useCategory();
+  const { loaderCategories, categories, createCategory, messageCategories } = useCategory();
+  const { user } = useUser();
   const handleClickModal = () => {
     setIsModal(!isModal);
     setMessageModal({ isActive: false, message: "" });
   };
-  useEffect(() => {
-    getCategories(setLoaderCategories);
-  }, [loaderCategories]);
+  const handleClickCreateCategory = () => {
+    createCategory(nombre.value, foto.value);
+  };
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
       <NavBar />
@@ -46,14 +42,23 @@ const PrincipalPage = () => {
           <Loading />
         ) : (
           categories.map((categoria) => {
-            return <Categoria key={categoria.id} categoria={categoria} />;
+            return (
+              <Categoria
+                key={categoria.id}
+                categoria={categoria}
+                onClick={() => {
+                  localStorage.setItem("category", JSON.stringify(categoria));
+                  router.push("/producto");
+                }}
+              />
+            );
           })
         )}
       </section>
-      <Modal open={isModal} onClose={handleClickModal} title="Categoria" message={messageModal}>
+      <Modal open={isModal} onClose={handleClickModal} title="Categoria" message={messageCategories}>
         <Input {...nombre} placeholder="Nombre" type="text" />
         <Input {...foto} placeholder="Foto" type="text" />
-        <Button onClick={() => createCategory(nombre.value, foto.value, setMessageModal, setLoaderCategories)}>Agregar</Button>
+        <Button onClick={handleClickCreateCategory}>Agregar</Button>
       </Modal>
     </Main>
   );

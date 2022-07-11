@@ -1,36 +1,37 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { categoriaGetService, categoriaIdGetService, createCategoryService } from "../services/categoria.service";
+import { categoriaGetService, createCategoryService } from "../services/categoria.service";
 import { setCategories } from "../store/categoriesSlice";
-import { setCategory } from "../store/categorySlice";
 
 const useCategory = () => {
   const user = useSelector((state) => state.user.value);
+  const categories = useSelector((state) => state.categories.value);
   const dispatch = useDispatch();
+  const [loaderCategories, setLoaderCategories] = useState(true);
+  const [messageCategories, setMessageCategories] = useState({ message: "", isActive: false });
 
-  const getCategories = async (setLoader) => {
+  const getCategories = async () => {
     const data = await categoriaGetService(user.accessToken);
     if (data) {
       dispatch(setCategories(data));
-      setLoader(false);
+      setLoaderCategories(false);
     }
   };
-  const getCategory = async (id) => {
-    const data = await categoriaIdGetService(user.accessToken, id);
-    if (data) {
-      dispatch(setCategory(data));
-    }
-  };
-  const createCategory = async (nombre, foto, setMessage, setLoader) => {
+  const createCategory = async (nombre, foto) => {
     const data = await createCategoryService(user.accessToken, nombre, foto);
     if (data) {
-      setMessage({ message: data.message, isActive: true });
-      setLoader(true);
+      setMessageCategories({ message: data.message, isActive: true });
+      setLoaderCategories(true);
     }
   };
+  useEffect(() => {
+    getCategories();
+  }, [loaderCategories]);
   return {
-    getCategories,
-    getCategory,
+    loaderCategories,
     createCategory,
+    messageCategories,
+    categories,
   };
 };
 
