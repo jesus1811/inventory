@@ -1,11 +1,13 @@
 import axios from "axios";
-import { formatToken } from "../utils";
+import { expiredToken, formatToken } from "../utils";
 export const categoriaGetService = async (token) => {
+  // const router = useRouter();
   try {
     const response = await axios.get(process.env.NEXT_PUBLIC_URL + "/categoria", formatToken(token));
     if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);
+    expiredToken(err);
   }
 };
 export const categoriaIdGetService = async (token, id) => {
@@ -14,6 +16,7 @@ export const categoriaIdGetService = async (token, id) => {
     if (response.status === 200) return response.data;
   } catch (err) {
     console.log(err);
+    expiredToken(err);
   }
 };
 export const createCategoryService = async (token, nombre, foto) => {
@@ -23,5 +26,6 @@ export const createCategoryService = async (token, nombre, foto) => {
   } catch (err) {
     console.log(err);
     if (err.response.status === 400) return err.response.data;
+    expiredToken(err);
   }
 };

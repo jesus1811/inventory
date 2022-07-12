@@ -4,9 +4,7 @@ import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import { Add, Button, Input, Loading, Modal, Target, Title } from "../../components/common";
 import { Categoria } from "../../components/modules/principal";
-import useCategory from "../../hooks/useCategory";
-import useField from "../../hooks/useField";
-import useUser from "../../hooks/useUser";
+import { useCategory, useField, useUser } from "../../hooks";
 
 const PrincipalPage = () => {
   const router = useRouter();
@@ -17,7 +15,6 @@ const PrincipalPage = () => {
   const { user } = useUser();
   const handleClickModal = () => {
     setIsModal(!isModal);
-    setMessageModal({ isActive: false, message: "" });
   };
   const handleClickCreateCategory = () => {
     createCategory(nombre.value, foto.value);

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Main } from "../components/layouts";
 import { Button, Card, Input, Title } from "../components/common";
 import styles from "./styles.module.scss";
-import useField from "../hooks/useField";
 import useUser from "../hooks/useUser";
+import { useField } from "../hooks";
 
 const Index = () => {
   const user = useSelector((state) => state.user.value);

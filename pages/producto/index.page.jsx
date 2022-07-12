@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Add, Button, Card, Input, Loading, Modal, Target, Title } from "../../components/common";
 import { Main, NavBar } from "../../components/layouts";
+import { useField, useUser } from "../../hooks";
 import useProduct from "../../hooks/useProduct";
 import styles from "./styles.module.scss";
-import useField from "../../hooks/useField";
-import useUser from "../../hooks/useUser";
 
 const Producto = () => {
   const [isModalStock, setModalStock] = useState(false);
