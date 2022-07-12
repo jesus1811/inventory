@@ -6,3 +6,4 @@ export { default as Card } from "./card/Card.common";
 export { default as Target } from "./target/Target.common";
 export { default as Loading } from "./loading/Loading";
 export { default as Modal } from "./modal/Modal";
+export { default as File } from "./file/File";

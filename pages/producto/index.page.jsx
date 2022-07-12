@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Add, Button, Card, Input, Loading, Modal, Target, Title } from "../../components/common";
+import { Add, Button, Card, File, Input, Loading, Modal, Target, Title } from "../../components/common";
 import { Main, NavBar } from "../../components/layouts";
 import { useField, useUser } from "../../hooks";
 import useProduct from "../../hooks/useProduct";
+import { app } from "../../services/firebase.service";
 import styles from "./styles.module.scss";
 
 const Producto = () => {
@@ -16,12 +17,16 @@ const Producto = () => {
   const { user } = useUser();
   const nombre = useField();
   const stock = useField();
-  const foto = useField();
+  const [foto, setFoto] = useState({});
   const [isModalProduct, setIsModalProduct] = useState(false);
-  const { products, createProduct, loaderProducts, messageProducts, addStockProduct, deleteStockProduct } = useProduct();
+  const { products, createProduct, loaderProducts, messageProducts, addStockProduct, deleteStockProduct,setCleanMessage } = useProduct();
 
-  const handleClickAddProduct = () => {
-    createProduct(nombre.value, stock.value, foto.value, category.id, user.id);
+  const handleClickAddProduct = async () => {
+    if (foto.name) {
+      const path = app.storage().ref().child(foto.name);
+      await path.put(foto);
+    }
+    createProduct(nombre.value, stock.value, foto.name, category.id, user.id);
     nombre.setValue("");
     stock.setValue("");
   };
@@ -34,6 +39,13 @@ const Producto = () => {
     deleteStockProduct(product.id, stock.value);
     stock.setValue(null);
     stock.setValue("");
+  };
+  const handleClickModalProduct = () => {
+    setIsModalProduct(!isModalProduct);
+    nombre.setValue("");
+    stock.setValue(null)
+    setFoto({});
+    setCleanMessage();
   };
   return (
     <Main>
@@ -64,19 +76,21 @@ const Producto = () => {
                   }}
                 >
                   <Card center small>
-                    <img className={styles.image} src="/image.jpg" alt="image" />
-                    <Title variant="textMain">{producto.nombre}</Title>
-                    <Title variant="text">{producto.stock}</Title>
+                    <img className={styles.image} src={producto.foto} alt="image" />
+                    <Title textMain>{producto.nombre}</Title>
+                    <Title text>{producto.stock}</Title>
                   </Card>
                 </button>
               );
             })
         )}
       </section>
-      <Modal title={category.nombre} open={isModalProduct} onClose={() => setIsModalProduct(!isModalProduct)} message={messageProducts}>
+      <Modal title={category.nombre} open={isModalProduct} onClose={handleClickModalProduct} message={messageProducts}>
         <Input {...nombre} placeholder="Nombre" />
         <Input {...stock} placeholder="Stock" />
-        <Input {...foto} placeholder="Foto" />
+        <File {...foto} onChange={(e) => setFoto(e.target.files[0])}>
+          Foto
+        </File>
         <Button onClick={handleClickAddProduct}>Agregar</Button>
       </Modal>
       <Modal title={product.nombre} open={isModalStock} onClose={() => setModalStock(!isModalStock)} message={messageProducts}>

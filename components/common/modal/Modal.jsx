@@ -9,7 +9,7 @@ const Modal = ({ children, open, onClose, title, message }) => {
     <ModalMain open={open} onClose={onClose}>
       <div className={styles.containerModal}>
         <article className={styles.containerTitleModal}>
-          <Title>{title}</Title>
+          <Title subTile>{title}</Title>
         </article>
         <Card center>
           <div className={styles.containerInput}>

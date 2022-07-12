@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { categoriaGetService, createCategoryService } from "../services/categoria.service";
 import { setCategories } from "../store/categoriesSlice";
+import { getUrlFirebase } from "../utils/getUrlFirebase";
 
 const useCategory = () => {
   const user = useSelector((state) => state.user.value);
@@ -17,8 +18,11 @@ const useCategory = () => {
       setLoaderCategories(false);
     }
   };
-  const createCategory = async (nombre, foto) => {
-    const data = await createCategoryService(user.accessToken, nombre, foto);
+  const setCleanMessage = () => {
+    setMessageCategories({ message: "", isActive: false });
+  };
+  const createCategory = async (nombre, foto="image.jpg") => {
+    const data = await createCategoryService(user.accessToken, nombre, getUrlFirebase(foto));
     if (data) {
       setMessageCategories({ message: data.message, isActive: true });
       setLoaderCategories(true);
@@ -32,6 +36,7 @@ const useCategory = () => {
     createCategory,
     messageCategories,
     categories,
+    setCleanMessage
   };
 };
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addStockService, createProductService, deleteStockService, productoGetService } from "../services/producto.service";
 import { setProducts } from "../store/productsSlice";
+import { getUrlFirebase } from "../utils/getUrlFirebase";
 const useProduct = () => {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
@@ -16,9 +17,11 @@ const useProduct = () => {
       setLoaderProducts(false);
     }
   };
-
-  const createProduct = async (nombre, stock, foto, idCategoria, idUsuario) => {
-    const data = await createProductService(user.accessToken, nombre, stock, foto, idCategoria, idUsuario);
+  const setCleanMessage = () => {
+    setMessageProducts({ message: "", isActive: false });
+  };
+  const createProduct = async (nombre, stock, foto="image.jpg", idCategoria, idUsuario) => {
+    const data = await createProductService(user.accessToken, nombre, stock, getUrlFirebase(foto), idCategoria, idUsuario);
     if (data) {
       setMessageProducts({ isActive: true, message: data.message });
       setLoaderProducts(true);
@@ -48,6 +51,7 @@ const useProduct = () => {
     messageProducts,
     addStockProduct,
     deleteStockProduct,
+    setCleanMessage
   };
 };
 

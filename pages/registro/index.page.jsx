@@ -8,7 +8,7 @@ const RegistroPage = () => {
       <article className={styles.containerTitle}>
         <Title>Registrar</Title>
       </article>
-      <Card variant="center">
+      <Card center>
         <div className={styles.containerInput}>
           <Input placeholder="Nombre" type="text" />
           <Input placeholder="Apellido" type="password" />
