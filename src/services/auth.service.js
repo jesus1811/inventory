@@ -14,5 +14,6 @@ export const createUserService = async (nombre, apellido, usuario, contrasena, i
     if (response) return response.data;
   } catch (err) {
     console.log(err);
+    if (err.response.status === 400) return err.response.data;
   }
 };

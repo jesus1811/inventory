@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { Button, Card, Input, Title } from "../../components/common";
 import { Main } from "../../components/layouts";
@@ -29,6 +30,12 @@ const RegistroPage = () => {
           {user.message && <p>{user.message}</p>}
           <Button onClick={handleClickRegister}>Registrar</Button>
         </div>
+        <p className={styles.text}>
+          ya tiene cuenta?
+          <Link href="/">
+            <a className={styles.text__link}> ir a Login</a>
+          </Link>
+        </p>
       </Card>
     </Main>
   );

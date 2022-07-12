@@ -29,3 +29,11 @@
     text-align: center;
   }
 }
+.text {
+  padding: 10px;
+  font-size: $textSmall;
+  color: $white;
+  &__link {
+    color: $purple;
+  }
+}
