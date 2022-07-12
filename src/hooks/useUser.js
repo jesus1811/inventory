@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authLoginService } from "../services/auth.service";
+import { authLoginService, createUserService } from "../services/auth.service";
 import { setUser } from "../store/userSlice";
 
 const useUser = () => {
@@ -20,6 +20,7 @@ const useUser = () => {
   const handleClickLogut = () => {
     dispatch(setUser({}));
   };
+  
   useEffect(() => {
     if (!user.accessToken) router.push("/");
   }, [user]);

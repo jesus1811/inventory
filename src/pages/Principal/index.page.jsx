@@ -36,7 +36,7 @@ const PrincipalPage = () => {
     <Main title="Principal" description="Pagina Principal de Inventory">
       <NavBar />
       <Title>
-        Bienvenido {user.nombre} {user.apellido}
+        Bienvenid@ {user.nombre} {user.apellido} 
       </Title>
       <section className={styles.containerTarget}>
         <Target count={products.length} text="Total de Productos" color="purpleDark" />

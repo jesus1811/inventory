@@ -12,9 +12,6 @@ export const NavBar = () => {
           <a className={styles.title}>Inventory</a>
         </Link>
         <article className={styles.nav}>
-          <a href="">Categorias</a>
-          <a href="">Productos</a>
-          <a href="">Usuarios</a>
           <button onClick={handleClickLogut}>Cerrar session</button>
         </article>
       </div>

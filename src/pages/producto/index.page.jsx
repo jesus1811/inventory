@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Add, Button, Card, File, Input, Loading, Modal, Target, Title } from "../../components/common";
 import { Main, NavBar } from "../../components/layouts";
 import { useField, useUser } from "../../hooks";
 import useProduct from "../../hooks/useProduct";
 import { app } from "../../services/firebase.service";
+import { setProducts } from "../../store/productsSlice";
 import styles from "./styles.module.scss";
 
 const Producto = () => {
   const [isModalStock, setModalStock] = useState(false);
   const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
   const StorageCategory = () => {
     if (typeof window !== "undefined") return JSON.parse(localStorage.getItem("category")) || {};
     return {};
@@ -17,9 +20,11 @@ const Producto = () => {
   const { user } = useUser();
   const nombre = useField();
   const stock = useField();
+  const [search, setSearch] = useState("");
   const [foto, setFoto] = useState({});
   const [isModalProduct, setIsModalProduct] = useState(false);
-  const { products, createProduct, loaderProducts, messageProducts, addStockProduct, deleteStockProduct, setCleanMessage } = useProduct();
+  const { products, createProduct, loaderProducts, messageProducts, tableProducts, addStockProduct, deleteStockProduct, setCleanMessage } =
+    useProduct();
 
   const handleClickAddProduct = async () => {
     if (foto.name) {
@@ -47,6 +52,18 @@ const Producto = () => {
     setFoto({});
     setCleanMessage();
   };
+  const handleChangeBusqueda = (e) => {
+    setSearch(e.target.value);
+    filter(e.target.value);
+  };
+  const filter = (termino) => {
+    let result = tableProducts.filter((item) => {
+      if (item.nombre.toString().toLowerCase().includes(termino.toLowerCase())) {
+        return item;
+      }
+    });
+    dispatch(setProducts(result));
+  };
   return (
     <Main>
       <NavBar />
@@ -64,7 +81,7 @@ const Producto = () => {
           text={`Total de ${category?.nombre}`}
           color="purpleDark"
         />
-        <Target count="20" text="Total de Bebidas" color="purple" />
+        <Input placeholder={`Buscar ${category?.nombre}`} onChange={handleChangeBusqueda} />
       </section>
       <section className={styles.containerCard}>
         {loaderProducts ? (

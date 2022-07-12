@@ -11,8 +11,8 @@ import { useField } from "../hooks";
 const Index = () => {
   const user = useSelector((state) => state.user.value);
   const router = useRouter();
-  const usuario = useField(99,"jesus1811");
-  const password = useField(99,"1153259");
+  const usuario = useField(99, "jesus1811");
+  const password = useField(99, "1153259");
   const { handleClickLogin } = useUser();
   useEffect(() => {
     if (!user?.accessToken) router.push("/");
@@ -33,7 +33,7 @@ const Index = () => {
         <p className={styles.text}>
           no tienes cuenta?
           <Link href="./registro">
-            <a className={styles.text__link}>Registrar</a>
+            <a className={styles.text__link}> Registrar</a>
           </Link>
         </p>
       </Card>
