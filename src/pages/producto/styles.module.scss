@@ -1,0 +1,19 @@
+@use "/src/scss/variables" as *;
+@use "/src/scss/mixins" as *;
+.containerTitle {
+  @include flex;
+  gap: 20px;
+}
+.containerSearh {
+  @include content;
+  @include flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.containerCard {
+  @include content;
+  @include flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}

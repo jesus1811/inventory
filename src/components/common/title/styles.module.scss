@@ -1,0 +1,19 @@
+@use "/src/scss/variables" as *;
+@use "/src/scss/mixins" as *;
+.title {
+  font-size: $title;
+  color: $white;
+  text-align: center;
+  &__subTitle {
+    font-size: $subTitle;
+  }
+  &__textMain {
+    font-size: $textMain;
+  }
+  &__text {
+    font-size: $text;
+  }
+  &__textSmall {
+    font-size: $textSmall;
+  }
+}

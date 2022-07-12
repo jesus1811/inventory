@@ -1,0 +1,26 @@
+@use "/src/scss/variables" as *;
+@use "src//scss/mixins" as *;
+.containerTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 395px;
+  border-radius: 4px;
+  background-color: $purpleDark;
+}
+.images {
+  width: 140px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.containerInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
+  padding: 20px 20px;
+}
