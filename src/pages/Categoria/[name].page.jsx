@@ -72,7 +72,7 @@ const Producto = () => {
         <Target
           count={
             products.filter((item) => {
-              return item.idcategoria === router.query.name;
+              return item.nombrecategoria === router.query.name;
             }).length
           }
           text={`Total de ${router.query.name}`}
