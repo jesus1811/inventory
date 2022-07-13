@@ -7,16 +7,13 @@ import useProduct from "../../hooks/useProduct";
 import { app } from "../../services/firebase.service";
 import { setProducts } from "../../store/productsSlice";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/router";
 
 const Producto = () => {
   const [isModalStock, setModalStock] = useState(false);
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
-  const StorageCategory = () => {
-    if (typeof window !== "undefined") return JSON.parse(localStorage.getItem("category")) || {};
-    return {};
-  };
-  const category = StorageCategory();
+  const router = useRouter();
   const { user } = useUser();
   const nombre = useField();
   const stock = useField();
@@ -69,19 +66,19 @@ const Producto = () => {
       <NavBar />
       <section className={styles.containerTitle}>
         <Add onClick={() => setIsModalProduct(true)} />
-        <Title>{category?.nombre}</Title>
+        <Title>{router.query.name}</Title>
       </section>
       <section className={styles.containerSearh}>
         <Target
           count={
             products.filter((item) => {
-              return item.idcategoria === category?.id;
+              return item.idcategoria === router.query.name;
             }).length
           }
-          text={`Total de ${category?.nombre}`}
+          text={`Total de ${router.query.name}`}
           color="purpleDark"
         />
-        <Input placeholder={`Buscar ${category?.nombre}`} onChange={handleChangeBusqueda} />
+        <Input placeholder={`Buscar ${router.query.name}`} onChange={handleChangeBusqueda} />
       </section>
       <section className={styles.containerCard}>
         {loaderProducts ? (
@@ -89,28 +86,26 @@ const Producto = () => {
         ) : (
           products
             .filter((item) => {
-              return item.idcategoria === category?.id;
+              return item.nombrecategoria == router.query.name;
             })
-            .map((producto) => {
-              return (
-                <button
-                  key={producto.id}
-                  onClick={() => {
-                    setModalStock(true);
-                    setProduct(producto);
-                  }}
-                >
-                  <Card center small>
-                    <img className={styles.image} src={producto.foto} alt="image" />
-                    <Title textMain>{producto.nombre}</Title>
-                    <Title text>{producto.stock}</Title>
-                  </Card>
-                </button>
-              );
-            })
+            .map((producto) => (
+              <button
+                key={producto.id}
+                onClick={() => {
+                  setModalStock(true);
+                  setProduct(producto);
+                }}
+              >
+                <Card center small>
+                  <img className={styles.image} src={producto.foto} alt="image" />
+                  <Title textMain>{producto.nombre}</Title>
+                  <Title text>{producto.stock}</Title>
+                </Card>
+              </button>
+            ))
         )}
       </section>
-      <Modal title={category.nombre} open={isModalProduct} onClose={handleClickModalProduct} message={messageProducts}>
+      <Modal title={router.query.name} open={isModalProduct} onClose={handleClickModalProduct} message={messageProducts}>
         <Input {...nombre} placeholder="Nombre" />
         <Input {...stock} placeholder="Stock" />
         <File {...foto} onChange={(e) => setFoto(e.target.files[0])}>

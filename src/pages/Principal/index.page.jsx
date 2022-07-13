@@ -29,14 +29,13 @@ const PrincipalPage = () => {
     createCategory(nombre.value, foto.name);
   };
   const handleRedirectProducts = (categoria) => {
-    localStorage.setItem("category", JSON.stringify(categoria));
-    router.push("/producto");
+    router.push(`/Categoria/${categoria.nombre}`);
   };
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
       <NavBar />
       <Title>
-        Bienvenid@ {user.nombre} {user.apellido} 
+        Bienvenid@ {user.nombre} {user.apellido}
       </Title>
       <section className={styles.containerTarget}>
         <Target count={products.length} text="Total de Productos" color="purpleDark" />

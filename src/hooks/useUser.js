@@ -16,6 +16,7 @@ const useUser = () => {
       dispatch(setUser(data));
       router.push("/Principal");
     }
+    alert("reacciona")
   };
   const handleClickLogut = () => {
     dispatch(setUser({}));
