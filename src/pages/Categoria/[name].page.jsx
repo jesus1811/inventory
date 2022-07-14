@@ -75,7 +75,7 @@ const Producto = () => {
               return item.nombrecategoria === router.query.name;
             }).length
           }
-          text={`Total de ${router.query.name}`}
+          text={`Total de modificado ${router.query.name}`}
           color="purpleDark"
         />
         <Input placeholder={`Buscar ${router.query.name}`} onChange={handleChangeBusqueda} />
