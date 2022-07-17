@@ -11,6 +11,10 @@ export const NavBar = () => {
         <Link href="/Principal">
           <a className={styles.title}>Inventory</a>
         </Link>
+        <input type="checkbox" id="check" className={styles.checkBox} />
+        <label htmlFor="check" className={styles.menu}>
+          <img src="/menu.svg" alt="" />
+        </label>
         <article className={styles.nav}>
           <button onClick={handleClickLogut}>Cerrar session</button>
         </article>

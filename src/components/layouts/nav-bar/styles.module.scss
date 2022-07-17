@@ -21,10 +21,37 @@
 .nav {
   @include flex;
   gap: 24px;
-  color: $white;
   font-size: $textSmall;
+  background: $purpleDark;
+  transition: all ease-out 150ms;
+  @media screen and (max-width: 1024px) {
+    position: absolute;
+    right: 0;
+    top: 90px;
+    width: 50%;
+    flex-direction: column;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+  button {
+    color: $white;
+  }
 }
 .title {
   font-size: $subTitle;
   color: $white;
+}
+.checkBox {
+  display: none;
+  &:checked ~ .nav {
+    padding: 20px 0;
+    height: initial;
+  }
+}
+.menu {
+  display: none;
+  @media screen and (max-width: 1024px) {
+    display: initial;
+  }
 }
