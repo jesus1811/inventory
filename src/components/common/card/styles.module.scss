@@ -9,11 +9,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   gap: 10px;
+  padding-bottom: 10px;
    &__center {
     align-items: center;
   }
   &__small {
-    max-width: 300px;
-    aspect-ratio: 1/1;
+    flex: 300px;
   }
 }

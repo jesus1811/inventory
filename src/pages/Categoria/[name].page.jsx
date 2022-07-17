@@ -1,6 +1,16 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Add, Button, Card, File, Input, Loading, Modal, Target, Title } from "../../components/common";
+import {
+  Add,
+  Button,
+  Card,
+  File,
+  Input,
+  Loading,
+  Modal,
+  Target,
+  Title,
+} from "../../components/common";
 import { Main, NavBar } from "../../components/layouts";
 import { useField, useUser } from "../../hooks";
 import useProduct from "../../hooks/useProduct";
@@ -20,8 +30,16 @@ const Producto = () => {
   const [search, setSearch] = useState("");
   const [foto, setFoto] = useState({});
   const [isModalProduct, setIsModalProduct] = useState(false);
-  const { products, createProduct, loaderProducts, messageProducts, tableProducts, addStockProduct, deleteStockProduct, setCleanMessage } =
-    useProduct();
+  const {
+    products,
+    createProduct,
+    loaderProducts,
+    messageProducts,
+    tableProducts,
+    addStockProduct,
+    deleteStockProduct,
+    setCleanMessage,
+  } = useProduct();
 
   const handleClickAddProduct = async () => {
     if (foto.name) {
@@ -55,7 +73,9 @@ const Producto = () => {
   };
   const filter = (termino) => {
     let result = tableProducts.filter((item) => {
-      if (item.nombre.toString().toLowerCase().includes(termino.toLowerCase())) {
+      if (
+        item.nombre.toString().toLowerCase().includes(termino.toLowerCase())
+      ) {
         return item;
       }
     });
@@ -78,7 +98,10 @@ const Producto = () => {
           text={`Total de ${router.query.name}`}
           color="purpleDark"
         />
-        <Input placeholder={`Buscar ${router.query.name}`} onChange={handleChangeBusqueda} />
+        <Input
+          placeholder={`Buscar ${router.query.name}`}
+          onChange={handleChangeBusqueda}
+        />
       </section>
       <section className={styles.containerCard}>
         {loaderProducts ? (
@@ -89,23 +112,45 @@ const Producto = () => {
               return item.nombrecategoria == router.query.name;
             })
             .map((producto) => (
-              <button
+              <Card
+                center
+                small
                 key={producto.id}
                 onClick={() => {
                   setModalStock(true);
                   setProduct(producto);
                 }}
               >
-                <Card center small>
-                  <img className={styles.image} src={producto.foto} alt="image" />
-                  <Title textMain>{producto.nombre}</Title>
-                  <Title text>{producto.stock}</Title>
-                </Card>
-              </button>
+                <img className={styles.image} src={producto.foto} alt="image" />
+                <Title textMain>{producto.nombre}</Title>
+                <Title text>{producto.stock}</Title>
+              </Card>
+              // <button
+              //   key={producto.id}
+              //   onClick={() => {
+              //     setModalStock(true);
+              //     setProduct(producto);
+              //   }}
+              // >
+              //   <Card center small>
+              //     <img
+              //       className={styles.image}
+              //       src={producto.foto}
+              //       alt="image"
+              //     />
+              //     <Title textMain>{producto.nombre}</Title>
+              //     <Title text>{producto.stock}</Title>
+              //   </Card>
+              // </button>
             ))
         )}
       </section>
-      <Modal title={router.query.name} open={isModalProduct} onClose={handleClickModalProduct} message={messageProducts}>
+      <Modal
+        title={router.query.name}
+        open={isModalProduct}
+        onClose={handleClickModalProduct}
+        message={messageProducts}
+      >
         <Input {...nombre} placeholder="Nombre" />
         <Input {...stock} placeholder="Stock" />
         <File {...foto} onChange={(e) => setFoto(e.target.files[0])}>
@@ -113,7 +158,12 @@ const Producto = () => {
         </File>
         <Button onClick={handleClickAddProduct}>Agregar</Button>
       </Modal>
-      <Modal title={product.nombre} open={isModalStock} onClose={() => setModalStock(!isModalStock)} message={messageProducts}>
+      <Modal
+        title={product.nombre}
+        open={isModalStock}
+        onClose={() => setModalStock(!isModalStock)}
+        message={messageProducts}
+      >
         <Input {...stock} placeholder="Stock" />
         <div className={styles.containerSearh}>
           <Button onClick={handleClickAddStock}>Agregar</Button>
