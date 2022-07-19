@@ -46,7 +46,13 @@ const Producto = () => {
       const path = app.storage().ref().child(foto.name);
       await path.put(foto);
     }
-    createProduct(nombre.value, stock.value, foto.name, category.id, user.id);
+    createProduct(
+      nombre.value,
+      stock.value,
+      foto.name,
+      JSON.parse(localStorage.getItem("category")),
+      user.id
+    );
     nombre.setValue("");
     stock.setValue("");
   };
@@ -86,7 +92,9 @@ const Producto = () => {
       <NavBar />
       <section className={styles.containerTitle}>
         <Add onClick={() => setIsModalProduct(true)} />
-        <Title>{router.query.name}</Title>
+        <Title>
+          {router.query.name}
+        </Title>
       </section>
       <section className={styles.containerSearh}>
         <Target
@@ -125,23 +133,6 @@ const Producto = () => {
                 <Title textMain>{producto.nombre}</Title>
                 <Title text>{producto.stock}</Title>
               </Card>
-              // <button
-              //   key={producto.id}
-              //   onClick={() => {
-              //     setModalStock(true);
-              //     setProduct(producto);
-              //   }}
-              // >
-              //   <Card center small>
-              //     <img
-              //       className={styles.image}
-              //       src={producto.foto}
-              //       alt="image"
-              //     />
-              //     <Title textMain>{producto.nombre}</Title>
-              //     <Title text>{producto.stock}</Title>
-              //   </Card>
-              // </button>
             ))
         )}
       </section>
