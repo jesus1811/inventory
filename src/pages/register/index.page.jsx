@@ -13,8 +13,18 @@ const RegistroPage = () => {
   const password = useField();
   const [user, setUser] = useState({});
   const handleClickRegister = async () => {
-    const data = await createUserService(name.value, lastName.value, usuario.value, password.value, 1);
+    const data = await createUserService(
+      name.value,
+      lastName.value,
+      usuario.value,
+      password.value,
+      1
+    );
     if (data.message) setUser({ message: data.message });
+    name.setValue("");
+    usuario.setValue("");
+    lastName.setValue("");
+    password.setValue("");
   };
   return (
     <Main title="Registro" description="Pagina de registro">

@@ -92,9 +92,7 @@ const Producto = () => {
       <NavBar />
       <section className={styles.containerTitle}>
         <Add onClick={() => setIsModalProduct(true)} />
-        <Title>
-          {router.query.name}
-        </Title>
+        <Title>{router.query.name}</Title>
       </section>
       <section className={styles.containerSearh}>
         <Target
@@ -121,6 +119,7 @@ const Producto = () => {
             })
             .map((producto) => (
               <Card
+                pointer
                 center
                 small
                 key={producto.id}

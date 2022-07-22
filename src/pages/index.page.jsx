@@ -5,8 +5,7 @@ import Link from "next/link";
 import { Main } from "../components/layouts";
 import { Button, Card, Input, Title } from "../components/common";
 import styles from "./styles.module.scss";
-import useUser from "../hooks/useUser";
-import { useField } from "../hooks";
+import { useField, useUser } from "../hooks";
 
 const Index = () => {
   const user = useSelector((state) => state.user.value);
@@ -25,9 +24,23 @@ const Index = () => {
       <Card center>
         <img className={styles.images} src="/login.svg" alt="login" />
         <div className={styles.containerInput}>
-          <Input {...usuario} placeholder="Usuario" type="text" value={usuario.value} />
-          <Input {...password} placeholder="Contraseña" type="password" value={password.value} />
-          <Button onClick={() => handleClickLogin(usuario.value, password.value)}>Ingresar</Button>
+          <Input
+            {...usuario}
+            placeholder="Usuario"
+            type="text"
+            value={usuario.value}
+          />
+          <Input
+            {...password}
+            placeholder="Contraseña"
+            type="password"
+            value={password.value}
+          />
+          <Button
+            onClick={() => handleClickLogin(usuario.value, password.value)}
+          >
+            Ingresar
+          </Button>
           {user.message && <p>{user.message}</p>}
         </div>
         <p className={styles.text}>

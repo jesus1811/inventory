@@ -10,10 +10,13 @@
   align-items: flex-start;
   gap: 10px;
   padding-bottom: 10px;
-   &__center {
+  &__center {
     align-items: center;
   }
   &__small {
     flex: 300px;
+  }
+  &__pointer {
+    cursor: pointer;
   }
 }

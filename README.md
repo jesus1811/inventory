@@ -3,6 +3,8 @@
 This project was made with NodeJS and React 18+.
 
 [view demo](https://inventory-frontend-tau.vercel.app/)
+
+![Descripción de la imagen](/public/inventory.png)
 ## Getting Started
 
 First, run the development server:

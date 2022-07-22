@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 
 const Category = ({ category, onClick }) => {
   return (
-      <Card center small key={category.id} onClick={onClick}>
+      <Card center small key={category.id} onClick={onClick} pointer>
         <img className={styles.image} src={category.foto} alt="image" />
         <Title textMain>{category.nombre}</Title>
       </Card>
