@@ -13,7 +13,7 @@ import {
   Title,
 } from "../../components/common";
 import { useCategory, useField, useProduct, useUser } from "../../hooks";
-import { Categoria } from "./components";
+import { Category } from "./components";
 import { app } from "../../services/firebase.service";
 
 const PrincipalPage = () => {
@@ -43,9 +43,9 @@ const PrincipalPage = () => {
     }
     createCategory(nombre.value, foto.name);
   };
-  const handleRedirectProducts = (categoria) => {
-    localStorage.setItem("category", JSON.stringify(categoria.id));
-    router.push(`/Categoria/${categoria.nombre}`);
+  const handleRedirectProducts = (category) => {
+    localStorage.setItem("category", JSON.stringify(category.id));
+    router.push(`/category/${category.nombre}`);
   };
   return (
     <Main title="Principal" description="Pagina Principal de Inventory">
@@ -73,12 +73,12 @@ const PrincipalPage = () => {
         {loaderCategories ? (
           <Loading />
         ) : (
-          categories.map((categoria) => {
+          categories.map((category) => {
             return (
-              <Categoria
-                key={categoria.id}
-                categoria={categoria}
-                onClick={() => handleRedirectProducts(categoria)}
+              <Category
+                key={category.id}
+                category={category}
+                onClick={() => handleRedirectProducts(category)}
               />
             );
           })

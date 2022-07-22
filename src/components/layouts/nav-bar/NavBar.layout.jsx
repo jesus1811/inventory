@@ -8,7 +8,7 @@ export const NavBar = () => {
   return (
     <section className={styles.container}>
       <div className={styles.content}>
-        <Link href="/Principal">
+        <Link href="/home">
           <a className={styles.title}>Inventory</a>
         </Link>
         <input type="checkbox" id="check" className={styles.checkBox} />

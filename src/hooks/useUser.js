@@ -14,7 +14,7 @@ const useUser = () => {
     if (data.message) dispatch(setUser({ message: data.message }));
     if (!data.message) {
       dispatch(setUser(data));
-      router.push("/Principal");
+      router.push("/home");
     }
   };
   const handleClickLogut = () => {

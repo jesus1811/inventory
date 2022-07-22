@@ -143,7 +143,7 @@ const Producto = () => {
         message={messageProducts}
       >
         <Input {...nombre} placeholder="Nombre" />
-        <Input {...stock} placeholder="Stock" />
+        <Input {...stock} placeholder="Stock" type="number" />
         <File {...foto} onChange={(e) => setFoto(e.target.files[0])}>
           Foto
         </File>

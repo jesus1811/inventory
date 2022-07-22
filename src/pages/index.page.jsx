@@ -32,7 +32,7 @@ const Index = () => {
         </div>
         <p className={styles.text}>
           no tienes cuenta?
-          <Link href="./registro">
+          <Link href="./register">
             <a className={styles.text__link}> Registrar</a>
           </Link>
         </p>
