@@ -2,8 +2,6 @@
 
 This project was made with NodeJS and React 18+.
 
-[view demo](https://inventory-frontend-tau.vercel.app/)
-
 ![Descripción de la imagen](/public/inventory.png)
 ## Getting Started
 
@@ -36,7 +34,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deploy on Vercel
 
-[Demo deploy](https://service-comerce.vercel.app)
+[view demo](https://inventory-frontend-tau.vercel.app/)
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
