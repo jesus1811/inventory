@@ -3,7 +3,7 @@
 Product management web application with stock and images
 
 ![Descripción de la imagen](/public/inventory.png)
-## Getting Started
+## Getting Started 🚀
 
 First, run the development server:
 
@@ -15,14 +15,14 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Features
+## Features 🧷
 
 - User authentication
 - Stock control
 - Product Search
 - Image upload
 
-## Technologies
+## Technologies 🛠
 - Next.js
 - React.js
 - Styled-components
@@ -32,13 +32,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - PostgreSQL
 - Sass
 
-## Deploy on Vercel
+## Deploy on Vercel 🚀
 
 [view demo](https://inventory-frontend-tau.vercel.app/)
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Contact
+## Contact ✒
 
 [Portfolio](https://jesudev.vercel.app/) | [linkedin](https://www.linkedin.com/in/jesus-ayarza/) | [telegram](https://t.me/jesusA1811) | [WhatsApp](https://api.whatsapp.com/send/?phone=51936129604&text&type=phone_number&app_absent=0)
 
