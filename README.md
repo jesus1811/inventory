@@ -1,4 +1,4 @@
-# services ecommerce
+# Inventory
 
 Product management web application with stock and images
 
