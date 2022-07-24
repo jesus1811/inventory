@@ -1,6 +1,6 @@
 ## services ecommerce
 
-This project was made with NodeJS and React 18+.
+Product management web application with stock and images
 
 ![Descripción de la imagen](/public/inventory.png)
 ## Getting Started
